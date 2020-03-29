@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <record id="hms_department" model="ir.actions.act_window">
+            <field name="name">hms Department</field>
+            <field name="res_model">hms.department</field>
+        </record>
+<!--         <record id="hms_dept_view" model="ir.ui.view">-->
+<!--            <field name="name">hms dept</field>-->
+<!--            <field name="model">hms.dept</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree>-->
+<!--                    <field name="dept_name"/>-->
+<!--                    <field name="is_opened"/>-->
+<!--                    <field name="capacity"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+        <menuitem id="hms_department_menu" name="Department" parent="hms_root_menu" action="hms_department" />
+    </data>
+</odoo>
