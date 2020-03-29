@@ -13,7 +13,10 @@
                     <field name="first_name"/>
                     <field name="address"/>
                     <field name="age"/>
-                    <field name="image" widget="image"/>
+<!--                     <style>-->
+<!--                          .Your_custom_class > img { height: 200px; width: 200px; }-->
+<!--                     </style>-->
+                    <field name="image" widget="image" class="Your_custom_class"/>
                     <field name="department_capacity" />
                 </tree>
             </field>
@@ -41,7 +44,7 @@
                                 <field name="birth_date"/>
                                 <field name="age" widget="integer" type="number"/>
                                 <field name="address"/>
-                                <field name="image" widget="image"/>
+                                <field name="image" widget="image" />
                             </group>
                             <group string="Hospital Information">
                                 <field name="department_id" domain="[('is_opened','=',True)]"/>
@@ -50,6 +53,7 @@
                                        attrs="{'required':[('pcr','==',True)]}"/>
                                 <field name="history" attrs="{'invisible':[('age','&lt;',50)]}"/>
                                 <field name="pcr"/>
+                                <field name="email"/>
                                 <field name="doctor_id" widget="many2many_tags"
                                        attrs="{'readonly':[('department_id','=',False)]}"/>
                                 <field name="department_capacity" />
