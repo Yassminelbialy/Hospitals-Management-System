@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 
 class Patient(models.Model):
@@ -10,6 +11,7 @@ class Patient(models.Model):
     department_capacity = fields.Integer(related="department_id.capacity")
     first_name = fields.Char()
     birth_date = fields.Date()
+    age = fields.Integer(compute="compute_age")
     last_name = fields.Char()
     cr_ratio = fields.Float()
     address = fields.Char()
@@ -17,17 +19,22 @@ class Patient(models.Model):
     image = fields.Binary()
     email = fields.Char()
     pcr = fields.Boolean()
-    age = fields.Integer()
     state = fields.Selection([
         ('Undetermined', 'Undetermined'),
         ('Good', 'Good'),
         ('Fair', 'Fair'),
         ('Serious', 'Serious'),
     ], default="Undetermined")
-
     department_id = fields.Many2one("hms.department")
     doctor_id = fields.Many2many("hms.doctor")
     log_ids = fields.One2many("hms.patient_log", "patient_id")
+
+    @api.multi
+    @api.depends('birth_date')
+    def compute_age(self):
+         for record in self:
+              age = relativedelta(datetime.now().date(), fields.Datetime.from_string(record.birth_date)).years
+              record.age = age
 
     def change_state(self):
         if self.state == "Undetermined":
