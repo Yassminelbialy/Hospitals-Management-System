@@ -2,7 +2,6 @@ from odoo import models, fields, api
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from odoo.exceptions import ValidationError
-
 import re
 
 class Patient(models.Model):
@@ -31,6 +30,7 @@ class Patient(models.Model):
     department_id = fields.Many2one("hms.department")
     doctor_id = fields.Many2many("hms.doctor")
     log_ids = fields.One2many("hms.patient_log", "patient_id")
+    customer_id=fields.One2many("res.partner","related_patient_id")
     # Computer age from birth day
     @api.multi
     @api.depends('birth_date')
@@ -54,7 +54,7 @@ class Patient(models.Model):
         if self.age < 30:
             self.pcr = True
             return {"warning": {"title": "PCR", "message": "the pcr is now checked"}}
-
+    #Email Validtion
     @api.constrains('email')
     def validate_email(self):
          for obj in self:

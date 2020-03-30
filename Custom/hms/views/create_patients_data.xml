@@ -57,6 +57,7 @@
                                 <field name="doctor_id" widget="many2many_tags"
                                        attrs="{'readonly':[('department_id','=',False)]}"/>
                                 <field name="department_capacity" />
+
                             </group>
                         </group>
                         <notebook>
